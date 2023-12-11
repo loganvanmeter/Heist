@@ -17,7 +17,13 @@ namespace Heist
             public int SkillLevel {get; set;}
             public double Courage {get; set;}
         }
+        public class Bank{
+            public int Difficulty {get; set;}
 
+            public Bank(int difficulty){
+                Difficulty = difficulty;
+            }
+        }
         static void AskName(TeamMember member, List<TeamMember> team){
             Console.WriteLine("Enter your team member's name");
             string NameInput = Console.ReadLine();
@@ -56,12 +62,12 @@ namespace Heist
 
         static void DisplayTeam(List<TeamMember> team){
              Console.WriteLine("------------------------");
-            Console.WriteLine("Team Summary");
+            Console.WriteLine($"Team Summary: {team.Count} members");
             Console.WriteLine("------------------------");
-            Console.WriteLine($"Number of team members: {team.Count}");
-            foreach(TeamMember member in team){
-                Console.WriteLine($"Name: {member.Name} | Skill Level: {member.SkillLevel} | Courage Factor: {member.Courage}");
-            }
+            // Console.WriteLine($"Number of team members: {team.Count}");
+            // foreach(TeamMember member in team){
+            //     Console.WriteLine($"Name: {member.Name} | Skill Level: {member.SkillLevel} | Courage Factor: {member.Courage}");
+            // }
         }
         static void CreateTeam(List<TeamMember> team){
             Console.WriteLine("------------------------");
@@ -80,10 +86,22 @@ namespace Heist
                 DisplayTeam(team);
             }
         }
+
+        static void RunHeist(List<TeamMember> team){
+            Bank bank = new Bank(100);
+            int sumSkill = team.Sum(member => member.SkillLevel);
+            if(sumSkill < bank.Difficulty){
+                Console.WriteLine("Your heist failed. Whomp Whomp.");
+            } else {
+                Console.WriteLine("Your heist succeeded. Make it rain!");
+            }
+            
+        }
         static void Main(string[] args)
         {
             List<TeamMember> MyTeam = new List<TeamMember>();
             CreateTeam(MyTeam);
+            RunHeist(MyTeam);
         }
     }
 }
