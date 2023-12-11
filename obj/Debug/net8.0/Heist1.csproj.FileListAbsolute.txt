@@ -1,0 +1,14 @@
+C:\Users\Molly Blossom\workspace\csharp\Heist1\bin\Debug\net8.0\Heist1.exe
+C:\Users\Molly Blossom\workspace\csharp\Heist1\bin\Debug\net8.0\Heist1.deps.json
+C:\Users\Molly Blossom\workspace\csharp\Heist1\bin\Debug\net8.0\Heist1.runtimeconfig.json
+C:\Users\Molly Blossom\workspace\csharp\Heist1\bin\Debug\net8.0\Heist1.dll
+C:\Users\Molly Blossom\workspace\csharp\Heist1\bin\Debug\net8.0\Heist1.pdb
+C:\Users\Molly Blossom\workspace\csharp\Heist1\obj\Debug\net8.0\Heist1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Molly Blossom\workspace\csharp\Heist1\obj\Debug\net8.0\Heist1.AssemblyInfoInputs.cache
+C:\Users\Molly Blossom\workspace\csharp\Heist1\obj\Debug\net8.0\Heist1.AssemblyInfo.cs
+C:\Users\Molly Blossom\workspace\csharp\Heist1\obj\Debug\net8.0\Heist1.csproj.CoreCompileInputs.cache
+C:\Users\Molly Blossom\workspace\csharp\Heist1\obj\Debug\net8.0\Heist1.dll
+C:\Users\Molly Blossom\workspace\csharp\Heist1\obj\Debug\net8.0\refint\Heist1.dll
+C:\Users\Molly Blossom\workspace\csharp\Heist1\obj\Debug\net8.0\Heist1.pdb
+C:\Users\Molly Blossom\workspace\csharp\Heist1\obj\Debug\net8.0\Heist1.genruntimeconfig.cache
+C:\Users\Molly Blossom\workspace\csharp\Heist1\obj\Debug\net8.0\ref\Heist1.dll
