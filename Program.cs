@@ -86,11 +86,18 @@ namespace Heist
                 DisplayTeam(team);
             }
         }
+        
+        
 
         static void RunHeist(List<TeamMember> team){
             Bank bank = new Bank(100);
             int sumSkill = team.Sum(member => member.SkillLevel);
-            if(sumSkill < bank.Difficulty){
+            int LuckValue = new Random().Next(-10, 10);
+            int newDifficulty = bank.Difficulty + LuckValue;
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"Heist Summary: Team Skill Level - {sumSkill} | Bank Difficulty - {newDifficulty}");
+             Console.WriteLine("------------------------");
+            if(sumSkill < newDifficulty){
                 Console.WriteLine("Your heist failed. Whomp Whomp.");
             } else {
                 Console.WriteLine("Your heist succeeded. Make it rain!");
