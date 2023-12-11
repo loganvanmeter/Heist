@@ -12,3 +12,4 @@ C:\Users\Molly Blossom\workspace\csharp\Heist1\obj\Debug\net8.0\refint\Heist1.dl
 C:\Users\Molly Blossom\workspace\csharp\Heist1\obj\Debug\net8.0\Heist1.pdb
 C:\Users\Molly Blossom\workspace\csharp\Heist1\obj\Debug\net8.0\Heist1.genruntimeconfig.cache
 C:\Users\Molly Blossom\workspace\csharp\Heist1\obj\Debug\net8.0\ref\Heist1.dll
+C:\Users\Molly Blossom\workspace\csharp\Heist1\obj\Debug\net8.0\Heist1.sourcelink.json

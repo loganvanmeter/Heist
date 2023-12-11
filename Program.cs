@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
 
@@ -17,13 +18,16 @@ namespace Heist
             public double Courage {get; set;}
         }
 
-        static void AskName(TeamMember member){
+        static void AskName(TeamMember member, List<TeamMember> team){
             Console.WriteLine("Enter your team member's name");
             string NameInput = Console.ReadLine();
             if (NameInput != ""){
             member.Name = NameInput;
+            } else if (team.Count == 0){
+                AskName(member, team);
             } else {
-                AskName(member);
+                member.Name = NameInput;
+                Console.WriteLine("You entered a blank name. Moving on to the next part of the heist");
             }
         }
         static void AskSkill(TeamMember member){
@@ -49,19 +53,37 @@ namespace Heist
                 AskCourage(member);
             }
         }
-        static void CreateTeam(){
+
+        static void DisplayTeam(List<TeamMember> team){
+             Console.WriteLine("------------------------");
+            Console.WriteLine("Team Summary");
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"Number of team members: {team.Count}");
+            foreach(TeamMember member in team){
+                Console.WriteLine($"Name: {member.Name} | Skill Level: {member.SkillLevel} | Courage Factor: {member.Courage}");
+            }
+        }
+        static void CreateTeam(List<TeamMember> team){
             Console.WriteLine("------------------------");
             Console.WriteLine("Plan Your Heist!");
             Console.WriteLine("------------------------");
+            Console.WriteLine($"Number of team members: {team.Count}");
+             Console.WriteLine("------------------------");
             TeamMember Member = new TeamMember();
-            AskName(Member);
+            AskName(Member, team);
+            if (Member.Name.Length > 0){
             AskSkill(Member);
             AskCourage(Member);
-            Console.WriteLine($"Name: {Member.Name} | Skill: {Member.SkillLevel} | Courage: {Member.Courage}");
+            team.Add(Member);
+            CreateTeam(team);
+            } else {
+                DisplayTeam(team);
+            }
         }
         static void Main(string[] args)
         {
-            CreateTeam();
+            List<TeamMember> MyTeam = new List<TeamMember>();
+            CreateTeam(MyTeam);
         }
     }
 }
