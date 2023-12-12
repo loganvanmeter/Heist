@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
 
@@ -19,9 +20,14 @@ namespace Heist
         public class Bank{
             public int Difficulty {get; set;}
 
-            public Bank(int difficulty){
-                Difficulty = difficulty;
-            }
+            // public Bank(int difficulty){
+            //     Difficulty = difficulty;
+            // }
+        }
+        public class Results
+        {
+            public int Successes {get; set;} = 0;
+            public int Failures {get; set;} = 0;
         }
         static void AskName(TeamMember member, List<TeamMember> team){
             Console.WriteLine("Enter your team member's name");
@@ -51,7 +57,7 @@ namespace Heist
             Console.WriteLine("Enter your team member's courage factor (must be between 0.0 and 2.0)");
             string CourageInput = Console.ReadLine();
             bool isNum = double.TryParse(CourageInput, out double courageFactor);
-            if(isNum && courageFactor > 0 && courageFactor < 2){
+            if(isNum && courageFactor >= 0 && courageFactor <= 2){
                 member.Courage = courageFactor;
             } else {
                 Console.WriteLine("Not a valid entry.");
@@ -98,16 +104,23 @@ namespace Heist
                 return Trails();
             }
         }
-        static void RunMultipleHeists(List<TeamMember> team){
+        static void RunMultipleHeists(List<TeamMember> team, Bank bank){
+            Results thisResult = new Results();
             int numTrials = Trails();
             int i = 0;
             while (i < numTrials){
-                RunHeist(team);
+                RunHeist(team, bank, thisResult);
                 i++;
             }
+            Console.WriteLine("");
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"Total Heist Summary");
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"Successes: {thisResult.Successes} | Failures: {thisResult.Failures}");
+            Console.WriteLine("------------------------");
         }
-        static void RunHeist(List<TeamMember> team){
-            Bank bank = new Bank(100);
+        static void RunHeist(List<TeamMember> team, Bank bank, Results result){
+            //Bank bank = new Bank(100);
             int sumSkill = team.Sum(member => member.SkillLevel);
             int LuckValue = new Random().Next(-10, 10);
             int newDifficulty = bank.Difficulty + LuckValue;
@@ -116,16 +129,35 @@ namespace Heist
              Console.WriteLine("------------------------");
             if(sumSkill < newDifficulty){
                 Console.WriteLine("Your heist failed. Whomp Whomp.");
+                result.Failures++;
             } else {
                 Console.WriteLine("Your heist succeeded. Make it rain!");
+                result.Successes++;
             }
             
         }
-        static void Main(string[] args)
+        
+        static Bank setBankDifficulty(){
+            Bank bank = new Bank();
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"Enter the Bank's difficulty level");
+             Console.WriteLine("------------------------");
+            string BankInput = Console.ReadLine();
+            bool isNum = int.TryParse(BankInput, out int bankDifficulty);
+            if (isNum && bankDifficulty >= 0){
+                bank.Difficulty = bankDifficulty;
+                return bank;
+            } else {
+                Console.WriteLine("Not a valid entry");
+                return setBankDifficulty();
+            }
+        }
+        static void Main()
         {
             List<TeamMember> MyTeam = new List<TeamMember>();
+           Bank thisBank = setBankDifficulty();
             CreateTeam(MyTeam);
-            RunMultipleHeists(MyTeam);
+            RunMultipleHeists(MyTeam, thisBank);
         }
     }
 }
