@@ -9,8 +9,7 @@ namespace Heist
 {
     class Program
     {
-        public double MinCourage = 0.0;
-        public double MaxCourage = 2.0;
+       
         public class TeamMember
         {
             public string Name {get; set;}
@@ -87,8 +86,26 @@ namespace Heist
             }
         }
         
-        
 
+        static int Trails(){
+            Console.WriteLine("How many trials would you like to simulate for your heist?");
+            string TrialInput = Console.ReadLine();
+            bool isNum = int.TryParse(TrialInput, out int numTrials);
+            if (isNum && numTrials > 0){
+                return numTrials;
+            } else {
+                Console.WriteLine("Not a valid number");
+                return Trails();
+            }
+        }
+        static void RunMultipleHeists(List<TeamMember> team){
+            int numTrials = Trails();
+            int i = 0;
+            while (i < numTrials){
+                RunHeist(team);
+                i++;
+            }
+        }
         static void RunHeist(List<TeamMember> team){
             Bank bank = new Bank(100);
             int sumSkill = team.Sum(member => member.SkillLevel);
@@ -108,7 +125,7 @@ namespace Heist
         {
             List<TeamMember> MyTeam = new List<TeamMember>();
             CreateTeam(MyTeam);
-            RunHeist(MyTeam);
+            RunMultipleHeists(MyTeam);
         }
     }
 }
